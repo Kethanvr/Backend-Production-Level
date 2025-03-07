@@ -31,7 +31,7 @@ const userSchema = new Schema(
     coverimage: {
       type: String, //cloudinary url
     },
-    passsword: {
+    password: {
       type: String,
       requied: [true, 'Password is required'],
       minlength: 6,
