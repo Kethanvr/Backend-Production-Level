@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {LoginUser , LogoutUser, RegisterUser } from '../controllers/user.controllers.js';
+import {LoginUser , LogoutUser, RefreshAccessToken, RegisterUser } from '../controllers/user.controllers.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { mkdir } from 'node:fs/promises';
 import { verityJWT } from '../middlewares/auth.middleware.js';
@@ -25,5 +25,6 @@ router.route('/login').post(LoginUser);
 
 // secure route
 router.route('/logout').post( verityJWT ,LogoutUser)
+router.route('refresh-Token').post(RefreshAccessToken)
 
 export default router;
