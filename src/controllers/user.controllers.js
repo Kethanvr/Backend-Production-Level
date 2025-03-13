@@ -172,9 +172,10 @@ const LogoutUser = asyncHandler(async (req, res) => {
 
   // return res.status(200).json(new ApiResponse(200, {}, 'User logged out successfully'))
 
-  await User.findByIdAndUpdate(req.user.id,{
-    $set : {refreshtoken : undefined}
-  },
+  await User.findByIdAndUpdate(req.user.id,
+    {
+    $unset : {refreshtoken : 1}
+   },
   {new : true},
   )
   
@@ -398,7 +399,7 @@ const GetChannelProfile = asyncHandler( async (req , res) => {
 
   const Channel = await User.aggregate([
     {
-      $match : {username}?.toLowerCase()
+      $match : {username}
     },
     {
       $lookup :{

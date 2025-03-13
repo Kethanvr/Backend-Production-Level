@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { UpdateAccountdetails,UpdateUserAvatar,UpdateUserCoverImage,GetChannelProfile,GetWatchHistory ,GetCurrentUser, LoginUser , LogoutUser, PasswordReset, RefreshAccessToken, RegisterUser } from '../controllers/user.controllers.js';
-import { upload } from '../middlewares/multer.middleware.js';
+import {upload} from '../middlewares/multer.middleware.js';
 import { mkdir } from 'node:fs/promises';
 import { verityJWT } from '../middlewares/auth.middleware.js';
 
@@ -29,9 +29,9 @@ router.route('refresh-Token').post(RefreshAccessToken)
 router.route('/password-reset').post( verityJWT ,PasswordReset)
 router.route('current-user').get( verityJWT , GetCurrentUser )
 router.route('/update-account-details').patch( verityJWT ,UpdateAccountdetails)
-router.route('/update-user-avatar').patch( verityJWT ,upload.single('avatar'),UpdateUserAvatar)
-router.route('/update-user-cover-image').patch( verityJWT ,upload.single('coverimage'),UpdateUserCoverImage)
-router.route('/channel-profile/:id').get( verityJWT,GetChannelProfile)
+router.route('/update-user-avatar').patch( verityJWT ,upload.fields('avatar'),UpdateUserAvatar)
+router.route('/update-user-cover-image').patch( verityJWT ,upload.fields('coverimage'),UpdateUserCoverImage)
+router.route('/channel-profile/:username').get( verityJWT,GetChannelProfile)
 router.route('/watch-history').get( verityJWT ,GetWatchHistory)
 
 
